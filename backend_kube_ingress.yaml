@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: us-aesthetic-storyservice-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: storyservice.us-aesthetic.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: us-aesthetic-storyservice
+                port:
+                  number: 8080

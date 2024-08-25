@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: us-aesthetic-storyservice-deployment
+  labels:
+    app: us-aesthetic-storyservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: us-aesthetic-storyservice
+  template:
+    metadata:
+      labels:
+        app: us-aesthetic-storyservice
+    spec:
+      containers:
+      - name: us-aesthetic-storyservice-container
+        image: docker.io/library/us-aesthetic-storyservice:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "0.25"
+            memory: "256Mi"
+          requests:
+            cpu: "0.25"
+            memory: "256Mi"
+        env:
+        - name: MONGO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-credentials
+              key: mongo-username
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-credentials
+              key: mongo-password
+        - name: MONGO_CLUSTER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-credentials
+              key: mongo-cluster

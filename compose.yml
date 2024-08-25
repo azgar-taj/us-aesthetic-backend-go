@@ -1,0 +1,9 @@
+services:
+  us-backend-go:
+    build:
+      tags:
+        - us-aesthetic-storyservice
+        - asia-south1-docker.pkg.dev/silicon-outcome-427512-i5/us-image-registry/us-aesthetic-storyservice
+    ports:
+      - "80:80"
+    image: asia-south1-docker.pkg.dev/silicon-outcome-427512-i5/us-image-registry/us-aesthetic-storyservice
